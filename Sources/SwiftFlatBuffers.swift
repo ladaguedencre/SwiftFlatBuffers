@@ -63,6 +63,15 @@ open class FBTable {
             return nil
         }
     }
+
+    public init?(raw data: Data) {
+        let bb = FBBufferData(data: data)
+        _bbPos = 0
+        _bb = bb
+        if FBTable.verifier(_bbPos, vTable, bb, isFixed) == false {
+            return nil
+        }
+    }
     
     required public init?(pos: FBOffset, bb: FBBufferData) {
         _bbPos = pos
